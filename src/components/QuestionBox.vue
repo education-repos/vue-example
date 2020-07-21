@@ -4,7 +4,7 @@
             <b-col sm="6" offset="3">
                 <b-jumbotron>
                     <template v-slot:lead>
-                        Question text here?
+                        {{ currentQuestion.question }}
                     </template>
 
                     <hr class="my-4">
@@ -23,7 +23,10 @@
 
 <script>
     export default {
-        name: "QuestionBox"
+        name: "QuestionBox",
+        props: {
+            currentQuestion: Object
+        }
     }
 </script>
 

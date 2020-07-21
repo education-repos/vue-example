@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <QuestionBox />
+    <QuestionBox
+      :currentQuestion="questions[index]"
+    />
   </div>
 </template>
 
@@ -14,6 +16,23 @@ export default {
   components: {
     Header,
     QuestionBox
+  },
+  data() {
+    return {
+      questions: [],
+      index: 0
+    }
+  },
+  mounted() {
+    fetch('https://opentdb.com/api.php?amount=10&category=9&difficulty=hard&type=multiple', {
+      method: 'get'
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((jsonData) => {
+        this.questions = jsonData.results
+      })
   }
 }
 </script>
