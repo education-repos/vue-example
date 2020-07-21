@@ -31,6 +31,7 @@
 </template>
 
 <script>
+    import _ from 'lodash'
     export default {
         name: "QuestionBox",
         props: {
@@ -39,12 +40,8 @@
         },
         data() {
             return {
-                selectedIndex: null
-            }
-        },
-        methods: {
-            selectAnswer(index) {
-                this.selectedIndex = index
+                selectedIndex: null,
+                shuffledAnswers : []
             }
         },
         computed: {
@@ -52,6 +49,24 @@
                 let answers = [...this.currentQuestion.incorrect_answers]
                 answers.push(this.currentQuestion.correct_answer)
                 return answers
+            }
+        },
+        watch: {
+            currentQuestion: {
+                immediate: true,
+                handler() {
+                    this.selectedIndex = null
+                    this.shuffleAnswers()
+                }
+            }
+        },
+        methods: {
+            selectAnswer(index) {
+                this.selectedIndex = index
+            },
+            shuffleAnswers() {
+                let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
+                this.shuffledAnswers = _.shuffle(answers)
             }
         }
     }
