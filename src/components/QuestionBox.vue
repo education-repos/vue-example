@@ -14,7 +14,7 @@
                     </p>
 
                     <b-button variant="primary">Submit</b-button>
-                    <b-button variant="success">Next</b-button>
+                    <b-button @click="next" variant="success">Next</b-button>
                 </b-jumbotron>
             </b-col>
         </b-row>
@@ -25,7 +25,8 @@
     export default {
         name: "QuestionBox",
         props: {
-            currentQuestion: Object
+            currentQuestion: Object,
+            next: Function
         }
     }
 </script>
